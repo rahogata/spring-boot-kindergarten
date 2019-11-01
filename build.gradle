@@ -1,0 +1,33 @@
+/*
+  Gradle file to build and run a sample spring boot application.
+*/
+plugins {
+  id 'java'
+  id 'eclipse'
+  id 'org.springframework.boot' version '2.1.0.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+ext {
+  junitVersion = '5.3.2'
+}
+
+final modsToExclude = [ 'junit' ]
+configurations {
+  modsToExclude.each { implementation.exclude module : it } 
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+}
+
+test {
+  useJUnitPlatform()
+}
