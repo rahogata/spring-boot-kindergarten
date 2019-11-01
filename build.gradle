@@ -1,33 +1,39 @@
-/*
-  Gradle file to build and run a sample spring boot application.
-*/
 plugins {
-  id 'java'
-  id 'eclipse'
-  id 'org.springframework.boot' version '2.1.0.RELEASE'
+	id 'org.springframework.boot' version '2.1.0.RELEASE'
+	id 'java'
+	id 'war'
+    id 'eclipse'
+}
+
+ext {
+    junitVersion = '5.3.2'
+    junitPlatformVersion = '1.5.2'
 }
 
 apply plugin: 'io.spring.dependency-management'
 
-ext {
-  junitVersion = '5.3.2'
-}
-
-final modsToExclude = [ 'junit' ]
-configurations {
-  modsToExclude.each { implementation.exclude module : it } 
-}
+group = 'in.co.rahogata'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
-  mavenCentral()
+	mavenCentral()
+}
+
+final def modulesToExclude = [ 'junit' ]
+configurations {
+    modulesToExclude.each { implementation.exclude module: it }
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
-
-    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation "org.springframework.boot:spring-boot-starter-test",
+	"org.junit.jupiter:junit-jupiter-api:$junitVersion",
+	"org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 test {
-  useJUnitPlatform()
+    useJUnitPlatform()
 }
