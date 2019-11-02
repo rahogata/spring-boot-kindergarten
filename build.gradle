@@ -8,6 +8,7 @@ plugins {
 ext {
     junitVersion = '5.3.2'
     junitPlatformVersion = '1.5.2'
+    lombokVersion = '1.18.10'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -28,10 +29,14 @@ configurations {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	compileOnly "org.projectlombok:lombok:$lombokVersion"
+
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
 	testImplementation "org.springframework.boot:spring-boot-starter-test",
-	"org.junit.jupiter:junit-jupiter-api:$junitVersion",
-	"org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+	   "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+	   "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 test {
