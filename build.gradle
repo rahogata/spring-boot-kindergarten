@@ -32,3 +32,8 @@ dependencies {
 test {
   useJUnitPlatform()
 }
+
+wrapper {
+    version = '5.6.4'
+}
+
