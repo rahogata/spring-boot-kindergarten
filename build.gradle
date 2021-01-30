@@ -16,7 +16,8 @@ ext {
 final modsToExclude = [ 'junit' ]
 
 configurations {
-  modsToExclude.each { implementation.exclude module : it } 
+  modsToExclude.each { implementation.exclude module : it }
+  
 }
 
 repositories {
@@ -24,7 +25,9 @@ repositories {
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-web",
+                    "org.springframework.boot:spring-boot-starter-data-jpa",
+                    "com.h2database:h2"
 
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }

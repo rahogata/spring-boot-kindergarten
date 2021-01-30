@@ -1,0 +1,12 @@
+info.app.name: Yaml Configured App
+info:
+  app.version: 0.0.1
+spring:
+  jpa:
+    properties:
+      hibernate:
+        id.new_generator_mappings: false
+        jdbc:
+          lob.non_contextual_creation: true
+          batch_size: 3
+service.id: sharvara
