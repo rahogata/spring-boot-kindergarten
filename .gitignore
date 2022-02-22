@@ -30,3 +30,9 @@ bin/
 
 # Gradle files
 .gradle/
+
+# Idea project files
+*.iml
+*.ipr
+*.iws
+
