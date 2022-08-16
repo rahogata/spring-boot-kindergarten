@@ -6,9 +6,12 @@ plugins {
   id 'eclipse'
   id 'idea'
   id 'org.springframework.boot' version '2.1.0.RELEASE'
+  id "in.co.rahogata.swayamjar" version "0.2"
 }
 
 apply plugin: 'io.spring.dependency-management'
+
+version = '0.1'
 
 ext {
   junitVersion = '5.3.2'
@@ -34,7 +37,22 @@ test {
   useJUnitPlatform()
 }
 
-wrapper {
-    version = '5.6.4'
+task cleanFb(type: Delete) {
+	delete 'src/main/resources/public'
 }
 
+task copyFrontEnd(type: Copy, dependsOn: cleanFb) {
+	from 'india-flag/build'
+	into 'src/main/resources/public'
+}
+
+bootJar {
+	dependsOn copyFrontEnd
+}
+
+swayamJar {
+	dependencies bootJar
+	source = bootJar.outputs.files.singleFile
+}
+
+assemble.dependsOn tasks.swayamJar

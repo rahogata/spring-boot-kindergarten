@@ -36,3 +36,7 @@ bin/
 *.ipr
 *.iws
 
+# Frontend
+india-flag/node_modules
+india-flag/build
+src/main/resources/public
