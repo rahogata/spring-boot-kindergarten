@@ -6,6 +6,7 @@ plugins {
   id 'eclipse'
   id 'idea'
   id 'org.springframework.boot' version '2.4.13'
+  id 'io.freefair.lombok' version '6.6.3'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -27,7 +28,8 @@ repositories {
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 test {
@@ -35,6 +37,8 @@ test {
 }
 
 wrapper {
-    gradleVersion = '5.6.4'
+    gradleVersion = '7.6'
 }
 
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
