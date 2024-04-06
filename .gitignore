@@ -35,4 +35,4 @@ bin/
 *.iml
 *.ipr
 *.iws
-
+.idea
