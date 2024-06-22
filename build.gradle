@@ -4,8 +4,9 @@
 plugins {
   id 'java'
   id 'idea'
-  id 'org.springframework.boot' version '3.2.4'
+  id 'org.springframework.boot' version '2.5.15'
   id 'io.freefair.lombok' version '8.6'
+  id 'com.palantir.docker' version '0.36.0'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -21,9 +22,12 @@ repositories {
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-data-redis"
 
     testImplementation "org.junit.jupiter:junit-jupiter-engine"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {
@@ -37,4 +41,10 @@ wrapper {
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+docker {
+    name = 'rahogata/' + project.name
+    buildArgs([JAR_NAME: bootJar.archiveFileName.get()])
+    files bootJar.outputs
 }

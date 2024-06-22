@@ -1,0 +1,137 @@
+services:
+  redis-node-0:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-0:/bitnami/redis/data
+      - ./tls:/tls
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+
+  redis-node-1:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-1:/bitnami/redis/data
+      - ./tls:/tls
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+
+  redis-node-2:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-2:/bitnami/redis/data
+      - ./tls:/tls
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+
+  redis-node-3:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-3:/bitnami/redis/data
+      - ./tls:/tls
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+
+  redis-node-4:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-4:/bitnami/redis/data
+      - ./tls:/tls
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+
+  redis-node-5:
+    image: docker.io/bitnami/redis-cluster:7.2
+    volumes:
+      - redis-cluster_data-5:/bitnami/redis/data
+      - ./tls:/tls
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDISCLI_AUTH=bitnami'
+      - 'REDIS_CLUSTER_REPLICAS=1'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'REDIS_TLS_ENABLED=yes'
+      - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
+      - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
+      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
+      - 'REDIS_TLS_AUTH_CLIENTS=yes'
+      - 'REDIS_TLS_CA_DIR=/tls/clients'
+    ports:
+      - 7000:6379
+  app:
+    image: rahogata/spring-boot-kindergarten
+    volumes:
+      - ./tls:/tls
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_REDIS_CLUSTER_NODES=redis-node-0:6379
+      - SPRING_REDIS_HOST=
+      - SPRING_REDIS_PORT=0
+      - APP_REDIS_SSL_VERIFYPEER=false
+      - APP_REDIS_SSL_KEYSTORELOCATION=file:/tls/redis-client.p12
+      - APP_REDIS_SSL_KEYSTOREPASSWORD=ramana
+      - APP_REDIS_SSL_KEYSTORETYPE=PKCS12
+      #- APP_REDIS_SSL_TRUSTSTORELOCATION=file:/tls/redis-trust.p12
+      #- APP_REDIS_SSL_TRUSTSTOREPASSWORD=ramana
+
+volumes:
+  redis-cluster_data-0:
+    driver: local
+  redis-cluster_data-1:
+    driver: local
+  redis-cluster_data-2:
+    driver: local
+  redis-cluster_data-3:
+    driver: local
+  redis-cluster_data-4:
+    driver: local
+  redis-cluster_data-5:
+    driver: local
