@@ -10,10 +10,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
 
   redis-node-1:
     image: docker.io/bitnami/redis-cluster:7.2
@@ -26,10 +25,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
 
   redis-node-2:
     image: docker.io/bitnami/redis-cluster:7.2
@@ -42,10 +40,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
 
   redis-node-3:
     image: docker.io/bitnami/redis-cluster:7.2
@@ -58,10 +55,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
 
   redis-node-4:
     image: docker.io/bitnami/redis-cluster:7.2
@@ -74,10 +70,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
 
   redis-node-5:
     image: docker.io/bitnami/redis-cluster:7.2
@@ -99,10 +94,9 @@ services:
       - 'REDIS_TLS_ENABLED=yes'
       - 'REDIS_TLS_CERT_FILE=/tls/redis.crt'
       - 'REDIS_TLS_KEY_FILE=/tls/redis.key'
-      - 'REDIS_TLS_CA_FILE=/tls/ca.crt'
+      - 'REDIS_TLS_CA_FILE=/tls/ca-chain.crt'
       - 'REDIS_TLS_DH_PARAMS_FILE=/tls/redis.dh'
       - 'REDIS_TLS_AUTH_CLIENTS=yes'
-      - 'REDIS_TLS_CA_DIR=/tls/clients'
     ports:
       - 7000:6379
   app:
@@ -115,12 +109,12 @@ services:
       - SPRING_REDIS_CLUSTER_NODES=redis-node-0:6379
       - SPRING_REDIS_HOST=
       - SPRING_REDIS_PORT=0
-      - APP_REDIS_SSL_VERIFYPEER=false
+      - APP_REDIS_SSL_VERIFYPEER=true
       - APP_REDIS_SSL_KEYSTORELOCATION=file:/tls/redis-client.p12
       - APP_REDIS_SSL_KEYSTOREPASSWORD=ramana
       - APP_REDIS_SSL_KEYSTORETYPE=PKCS12
-      #- APP_REDIS_SSL_TRUSTSTORELOCATION=file:/tls/redis-trust.p12
-      #- APP_REDIS_SSL_TRUSTSTOREPASSWORD=ramana
+      - APP_REDIS_SSL_TRUSTSTORELOCATION=file:/tls/redis-trust.jks
+      - APP_REDIS_SSL_TRUSTSTOREPASSWORD=ramana
 
 volumes:
   redis-cluster_data-0:
