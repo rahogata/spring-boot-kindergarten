@@ -23,11 +23,10 @@ repositories {
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web",
-            "org.springframework.boot:spring-boot-starter-data-redis"
+            "org.springframework.boot:spring-boot-starter-data-redis",
+            "in.co.rahogata:lettucessl-spring-boot-starter:0.1.0"
 
     testImplementation "org.junit.jupiter:junit-jupiter-engine"
-
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {
