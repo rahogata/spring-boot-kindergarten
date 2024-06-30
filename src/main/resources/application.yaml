@@ -2,16 +2,16 @@ spring:
   cache:
     type: redis
   redis:
-    host: localhost
-    port: 7000
+#    host: localhost
+#    port: 7000
     ssl: true
-    password: hanuma
-rahogata:
-  lettuce:
-    ssl:
-      key-store-location: classpath:redis-client.p12
-      key-store-password: ramana
-      key-store-type: PKCS12
-#      trust-store-location: classpath:redis-trust.p12
+#    password: hanuma
+#rahogata:
+#  lettuce:
+#    ssl:
+#      key-store-location: classpath:redis-client.p12
+#      key-store-password: ramana
+#      key-store-type: PKCS12
+#      trust-store-location: classpath:ca.p12
 #      trust-store-password: ramana
-      verify-peer: false
+#      verify-peer: true

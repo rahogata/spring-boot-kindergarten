@@ -9,8 +9,6 @@ plugins {
   id 'com.palantir.docker' version '0.36.0'
 }
 
-apply plugin: 'io.spring.dependency-management'
-
 final modsToExclude = [ 'junit' ]
 
 configurations {
@@ -18,13 +16,21 @@ configurations {
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
+    maven {
+        url = 'https://s01.oss.sonatype.org/content/groups/staging/'
+    }
 }
 
 dependencies {
+    implementation(platform('org.springframework.boot:spring-boot-dependencies:2.5.15')) {
+        dependencies {
+            implementation('io.netty:netty-bom') {version {strictly '4.1.111.Final'}}
+            implementation('ch.qos.logback:logback-classic') {version {strictly '1.2.13'}}
+        }
+    }
     implementation "org.springframework.boot:spring-boot-starter-web",
-            "org.springframework.boot:spring-boot-starter-data-redis",
-            "in.co.rahogata:lettucessl-spring-boot-starter:0.1.0"
+            "in.co.rahogata:lettucessl-spring-boot-starter:0.1.0-SNAPSHOT"
 
     testImplementation "org.junit.jupiter:junit-jupiter-engine"
 }

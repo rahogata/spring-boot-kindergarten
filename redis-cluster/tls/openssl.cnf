@@ -1,6 +1,20 @@
+[alt_names]
+DNS.1 = redis-node-0
+DNS.2 = redis-node-1
+DNS.3 = redis-node-2
+DNS.4 = redis-node-3
+DNS.5 = redis-node-4
+DNS.6 = redis-node-5
+IP.1 = 172.21.0.11
+IP.2 = 172.21.0.12
+IP.3 = 172.21.0.13
+IP.4 = 172.21.0.14
+IP.5 = 172.21.0.15
+IP.6 = 172.21.0.16
 [ server_cert ]
 keyUsage = digitalSignature, keyEncipherment
-nsCertType = server
+nsCertType = server, client
+subjectAltName = @alt_names
 [ client_cert ]
 keyUsage = digitalSignature, keyEncipherment
 nsCertType = client

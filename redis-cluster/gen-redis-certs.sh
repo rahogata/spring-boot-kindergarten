@@ -46,9 +46,23 @@ openssl req \
     -out tls/ca.crt
 
 cat > tls/openssl.cnf <<_END_
+[alt_names]
+DNS.1 = redis-node-0
+DNS.2 = redis-node-1
+DNS.3 = redis-node-2
+DNS.4 = redis-node-3
+DNS.5 = redis-node-4
+DNS.6 = redis-node-5
+IP.1 = 172.21.0.11
+IP.2 = 172.21.0.12
+IP.3 = 172.21.0.13
+IP.4 = 172.21.0.14
+IP.5 = 172.21.0.15
+IP.6 = 172.21.0.16
 [ server_cert ]
 keyUsage = digitalSignature, keyEncipherment
-nsCertType = server
+nsCertType = server, client
+subjectAltName = @alt_names
 [ client_cert ]
 keyUsage = digitalSignature, keyEncipherment
 nsCertType = client
@@ -56,6 +70,11 @@ _END_
 
 generate_cert server "*" "-extfile tls/openssl.cnf -extensions server_cert"
 generate_cert client "*" "-extfile tls/openssl.cnf -extensions client_cert"
-generate_cert redis "*"
+#generate_cert redis "*" '-extfile tls/openssl.cnf -extensions redis_cert'
 
 [ -f tls/redis.dh ] || openssl dhparam -out tls/redis.dh 2048
+[ -f tls/redis-client.p12 ] || openssl pkcs12 -export -out tls/redis-client.p12 -inkey tls/client.key -in tls/client.crt -passout pass:ramana
+[ -f tls/ca.p12 ] || cat tls/server.crt tls/ca.crt > tls/ca-chain.crt && keytool -importcert -keystore tls/ca.p12 -storetype PKCS12 -alias redisca -file tls/ca-chain.crt -storepass ramana -noprompt
+#keytool -importcert -keystore tls/ca.p12 -storetype PKCS12 -alias redisserver -file tls/server.crt -storepass ramana -noprompt
+#keytool -importcert -keystore tls/ca.p12 -storetype PKCS12 -alias rediscluster -file tls/redis.crt -storepass ramana -noprompt
+rm -f tls/ca-chain.crt
