@@ -7,7 +7,11 @@ plugins {
   id 'org.springframework.boot' version '2.5.15'
   id 'io.freefair.lombok' version '8.6'
   id 'com.palantir.docker' version '0.36.0'
+    id 'maven-publish'
 }
+
+group = 'in.co.rahogata.boot'
+version = '0.1.0-SNAPSHOT'
 
 final modsToExclude = [ 'junit' ]
 
@@ -44,12 +48,33 @@ wrapper {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 docker {
     name = 'rahogata/' + project.name
     buildArgs([JAR_NAME: bootJar.archiveFileName.get()])
     files bootJar.outputs
+}
+
+publishing {
+    publications {
+        mavenReadme(MavenPublication) {
+            artifact ("config.yaml") {
+                artifactId = project.name + '-manifest'
+                extension = 'yaml'
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = uri('http://localhost:8081/repository/maven-snapshots/')
+            credentials {
+                username = 'admin'
+                password = ''
+            }
+            allowInsecureProtocol = true
+        }
+    }
 }
