@@ -1,4 +1,4 @@
-package in.co.rahogata;
+package in.co.rahogata.virtualthreads;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

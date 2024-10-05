@@ -36,3 +36,7 @@ bin/
 *.ipr
 *.iws
 .idea
+
+# Jmeter files
+vthread.report
+
