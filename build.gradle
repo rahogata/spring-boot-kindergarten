@@ -4,8 +4,8 @@
 plugins {
   id 'java'
   id 'idea'
-  id 'org.springframework.boot' version '3.2.4'
-  id 'io.freefair.lombok' version '8.6'
+  id 'org.springframework.boot' version '3.3.4'
+  id 'io.freefair.lombok' version '8.10.2'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -35,6 +35,6 @@ wrapper {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
