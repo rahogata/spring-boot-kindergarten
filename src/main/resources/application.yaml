@@ -1,0 +1,5 @@
+controller:
+  db:
+    redis:
+      host: localhost
+      port: 6379
