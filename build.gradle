@@ -11,7 +11,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-final modsToExclude = [ 'junit' ]
+final modsToExclude = [ 'junit', 'spring-boot-starter-tomcat' ]
 
 configurations {
   modsToExclude.each { implementation.exclude module : it } 
@@ -22,7 +22,14 @@ repositories {
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-web",
+        "org.springframework.boot:spring-boot-starter-jetty"
+    implementation platform('org.eclipse.jetty:jetty-bom:12.1.1')
+    
+    implementation 'org.eclipse.jetty.http3:jetty-http3-server',
+        'org.eclipse.jetty.http2:jetty-http2-server',
+        'org.eclipse.jetty:jetty-alpn-java-server'
+        //'org.eclipse.jetty:jetty-alpn-conscrypt-server'
 
     testImplementation "org.junit.jupiter:junit-jupiter-engine"
 }
