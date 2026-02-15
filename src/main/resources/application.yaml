@@ -1,0 +1,10 @@
+webauthn:
+  allowedOrigins: localhost
+  rpId: localhost
+  rpName: DwaraPalaka
+spring:
+  security:
+    user:
+      name: rama
+      password: seetha
+      roles: USER

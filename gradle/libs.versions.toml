@@ -9,4 +9,6 @@ freefair-lombok = { id = "io.freefair.lombok", version.ref = "freefair-lombok" }
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
 spring-boot-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+spring-security-webauthn = { module = "org.springframework.security:spring-security-webauthn" }
