@@ -1,10 +1,18 @@
 webauthn:
-  allowedOrigins: localhost
+  allowedOrigins: https://localhost:8443
   rpId: localhost
   rpName: DwaraPalaka
 spring:
   security:
     user:
       name: rama
-      password: seetha
+      password: seeta
       roles: USER
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: classpath:server.p12
+    key-store-password: ramana
+    key-store-type: PKCS12
+    key-alias: springboot

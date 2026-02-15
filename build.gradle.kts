@@ -18,8 +18,11 @@ repositories {
 
 dependencies {
     implementation(platform(libs.spring.boot.bom))
-    listOf(libs.spring.boot.web,libs.spring.boot.security).forEach { implementation(it)}
-    implementation(libs.spring.security.webauthn)
+    listOf(libs.spring.boot.web,
+        libs.spring.boot.security,
+        libs.spring.security.webauthn,
+        libs.spring.boot.thymeleaf,
+        libs.spring.boot.thymeleafSecurity).forEach { implementation(it)}
 
     testImplementation(libs.jupiter.engine)
 }

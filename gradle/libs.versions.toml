@@ -12,3 +12,5 @@ spring-boot-web = { module = "org.springframework.boot:spring-boot-starter-web" 
 spring-boot-security = { module = "org.springframework.boot:spring-boot-starter-security" }
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 spring-security-webauthn = { module = "org.springframework.security:spring-security-webauthn" }
+spring-boot-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+spring-boot-thymeleafSecurity = { module = "org.thymeleaf.extras:thymeleaf-extras-springsecurity6" }
