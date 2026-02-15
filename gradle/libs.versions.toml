@@ -1,0 +1,12 @@
+[versions]
+spring-boot = "4.0.2"
+freefair-lombok = "9.2.0"
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+freefair-lombok = { id = "io.freefair.lombok", version.ref = "freefair-lombok" }
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-boot-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
