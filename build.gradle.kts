@@ -2,8 +2,8 @@
   Gradle file to build and run a sample spring boot application.
 */
 plugins {
-  `java`
-  `idea`
+  java
+  idea
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.freefair.lombok)
 }
