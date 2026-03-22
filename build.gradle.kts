@@ -18,8 +18,7 @@ repositories {
 
 dependencies {
     implementation(platform(libs.spring.boot.bom))
-    implementation(libs.spring.boot.web)
-
+    implementation(libs.spring.boot.webflux)
     testImplementation(libs.jupiter.engine)
 }
 
