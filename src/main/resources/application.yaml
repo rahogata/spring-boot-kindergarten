@@ -1,0 +1,18 @@
+server:
+  port: 8443
+  http2:
+    enabled: true
+  ssl:
+    bundle: "server"
+
+spring:
+  ssl:
+    bundle:
+      jks:
+        server:
+          key:
+            alias: "server"
+          keystore:
+            location: "classpath:server.p12"
+            password: "FooBar"
+            type: "PKCS12"
