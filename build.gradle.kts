@@ -33,6 +33,10 @@ tasks.wrapper {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
+}
+
+tasks.register("run") {
+    dependsOn(tasks.bootRun)
 }
